@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sistema de Gerenciamento de Estoque</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1><i class="fas fa-box-open"></i> Sistema de Estoque</h1>
+      <p>Gerencie seu inventário de forma simples e eficiente</p>
+    </header>
+
+    <div class="tabs">
+      <button class="tab-btn active" data-tab="lista-produtos">
+        <i class="fas fa-list"></i> Lista de Produtos
+      </button>
+      <button class="tab-btn" data-tab="adicionar-produto">
+        <i class="fas fa-plus-circle"></i> Adicionar Produto
+      </button>
+    </div>
+
+    <div class="content">
+      <!-- Lista de Produtos -->
+      <div class="tab-content active" id="lista-produtos">
+        <div class="search-container">
+          <input type="text" id="search-input" placeholder="Buscar produtos...">
+          <button id="search-btn"><i class="fas fa-search"></i></button>
+        </div>
+        
+        <div class="produtos-container">
+          <table id="produtos-table">
+            <thead>
+              <tr>
+                <th>Nome</th>
+                <th>Categoria</th>
+                <th>Preço</th>
+                <th>Quantidade</th>
+                <th>Ações</th>
+              </tr>
+            </thead>
+            <tbody id="produtos-lista">
+              <!-- Produtos serão adicionados aqui dinamicamente -->
+            </tbody>
+          </table>
+          <div id="no-products" class="hidden">
+            <p>Nenhum produto encontrado</p>
+          </div>
+          <div id="loading">
+            <i class="fas fa-spinner fa-spin"></i> Carregando produtos...
+          </div>
+        </div>
+      </div>
+
+      <!-- Adicionar/Editar Produto -->
+      <div class="tab-content" id="adicionar-produto">
+        <form id="produto-form">
+          <input type="hidden" id="produto-id">
+          
+          <div class="form-group">
+            <label for="nome">Nome do Produto *</label>
+            <input type="text" id="nome" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="descricao">Descrição</label>
+            <textarea id="descricao"></textarea>
+          </div>
+          
+          <div class="form-row">
+            <div class="form-group">
+              <label for="preco">Preço (R$) *</label>
+              <input type="number" id="preco" min="0" step="0.01" required>
+            </div>
+            
+            <div class="form-group">
+              <label for="quantidade">Quantidade *</label>
+              <input type="number" id="quantidade" min="0" required>
+            </div>
+          </div>
+          
+          <div class="form-row">
+            <div class="form-group">
+              <label for="categoria">Categoria</label>
+              <input type="text" id="categoria">
+            </div>
+            
+            <div class="form-group">
+              <label for="fornecedor">Fornecedor</label>
+              <input type="text" id="fornecedor">
+            </div>
+          </div>
+          
+          <div class="form-buttons">
+            <button type="button" id="cancelar-btn" class="btn btn-secondary">Cancelar</button>
+            <button type="submit" id="salvar-btn" class="btn btn-primary">Salvar Produto</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal para confirmação de exclusão -->
+  <div id="delete-modal" class="modal">
+    <div class="modal-content">
+      <h3>Confirmar Exclusão</h3>
+      <p>Tem certeza que deseja excluir este produto?</p>
+      <div class="modal-buttons">
+        <button id="cancel-delete" class="btn btn-secondary">Cancelar</button>
+        <button id="confirm-delete" class="btn btn-danger">Excluir</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast para notificações -->
+  <div id="toast" class="toast">
+    <div class="toast-content">
+      <i id="toast-icon" class="fas"></i>
+      <span id="toast-message"></span>
+    </div>
+  </div>
+
+  <footer>
+    <p>Sistema de Gerenciamento de Estoque &copy; 2023</p>
+  </footer>
+
+  <script src="js/script.js"></script>
+</body>
+</html> 
